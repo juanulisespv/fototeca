@@ -33,9 +33,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  devIndicators: {
-    buildActivity: false,
-  },
   // Optimización para Vercel
   output: 'standalone',
 };

@@ -8,8 +8,31 @@ import { Home, Calendar } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'MediaFlow',
-  description: 'Organize and manage your media files with ease.',
+  title: 'Fototeca - Gestión Inteligente de Fotos',
+  description: 'Una aplicación moderna para gestionar y organizar tu colección de fotos con inteligencia artificial.',
+  keywords: ['fotos', 'galería', 'organización', 'IA', 'gestión de medios'],
+  authors: [{ name: 'Juan Ulises' }],
+  creator: 'Juan Ulises',
+  publisher: 'Fototeca',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
+  metadataBase: new URL('https://fototeca.vercel.app'),
+  openGraph: {
+    type: 'website',
+    locale: 'es_ES',
+    url: 'https://fototeca.vercel.app',
+    title: 'Fototeca - Gestión Inteligente de Fotos',
+    description: 'Una aplicación moderna para gestionar y organizar tu colección de fotos con inteligencia artificial.',
+    siteName: 'Fototeca',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fototeca - Gestión Inteligente de Fotos',
+    description: 'Una aplicación moderna para gestionar y organizar tu colección de fotos con inteligencia artificial.',
+  },
 };
 
 export default function RootLayout({
