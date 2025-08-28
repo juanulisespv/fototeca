@@ -292,8 +292,7 @@ export default function ClientPage() {
     if (!thumbnailFile) return;
 
     const toastId = `thumbnail-upload-${Date.now()}`;
-    const { id } = toast({
-        id: toastId,
+    toast({
         title: "Uploading thumbnail...",
         description: "Your new thumbnail is being uploaded. Please wait.",
     });
@@ -332,9 +331,8 @@ export default function ClientPage() {
                         description: "Could not save the new thumbnail.",
                     });
                     reject(error);
-                } finally {
-                    dismiss(id);
                 }
+            }
             }
         );
     });

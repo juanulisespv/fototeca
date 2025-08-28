@@ -2,7 +2,7 @@
 
 import { Download, Tag, Trash2, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 type BatchActionsProps = {
   selectionCount: number
