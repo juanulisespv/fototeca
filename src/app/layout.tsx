@@ -4,7 +4,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 import { Sidebar, SidebarProvider, SidebarInset, SidebarTrigger, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
-import { Home, Calendar, Camera, Tags, Settings, Upload, Search } from 'lucide-react';
+import { Home, Calendar, Camera, Settings } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -14,16 +14,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'Juan Ulises' }],
   creator: 'Juan Ulises',
   publisher: 'Fototeca',
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
-  },
-  metadataBase: new URL('https://fototeca.vercel.app'),
   openGraph: {
     type: 'website',
     locale: 'es_ES',
-    url: 'https://fototeca.vercel.app',
     title: 'Fototeca - Gestión Inteligente de Fotos',
     description: 'Una aplicación moderna para gestionar y organizar tu colección de fotos con inteligencia artificial.',
     siteName: 'Fototeca',
@@ -80,30 +73,12 @@ export default function RootLayout({
                                     </SidebarMenuButton>
                                 </Link>
                             </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton tooltip="Buscar Fotos">
-                                    <Search />
-                                    <span>Buscar</span>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton tooltip="Gestionar Etiquetas">
-                                    <Tags />
-                                    <span>Etiquetas</span>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
                         </SidebarMenu>
                     </div>
                     
-                    {/* Bottom Section */}
+                    {/* Bottom Section - Solo Ajustes */}
                     <div className="border-t pt-2">
                         <SidebarMenu>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton tooltip="Subir Fotos">
-                                    <Upload />
-                                    <span>Subir</span>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
                             <SidebarMenuItem>
                                 <SidebarMenuButton tooltip="Configuración">
                                     <Settings />
