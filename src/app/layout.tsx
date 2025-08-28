@@ -68,8 +68,8 @@ export default function RootLayout({
           <SidebarProvider>
             <Sidebar>
                 <div className="flex flex-col h-full p-2">
-                    {/* Logo/Brand */}
-                    <div className="flex items-center gap-2 p-2 mb-4">
+                    {/* Logo/Brand - También sirve como título accesible */}
+                    <div className="flex items-center gap-2 p-2 mb-4" role="banner" aria-label="Fototeca Navigation">
                         <Camera className="h-6 w-6 text-primary" />
                         <span className="font-bold text-lg">Fototeca</span>
                     </div>
@@ -110,6 +110,16 @@ export default function RootLayout({
                 </div>
             </Sidebar>
             <SidebarInset>
+              {/* Header con botón de menú para móvil */}
+              <header className="flex h-16 shrink-0 items-center gap-2 px-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+                <SidebarTrigger className="-ml-1" />
+                <div className="flex items-center gap-2 flex-1">
+                  <Camera className="h-5 w-5 text-primary md:hidden" />
+                  <span className="font-semibold md:hidden">Fototeca</span>
+                </div>
+              </header>
+              
+              {/* Contenido principal */}
               <div className="p-4 md:p-6">
                 {children}
               </div>
