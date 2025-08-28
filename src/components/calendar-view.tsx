@@ -78,9 +78,9 @@ export default function CalendarView({ onNewPost, posts, selectedDate, onDateSel
     const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
     return (
-      <div className="grid grid-cols-7 border-t border-l">
+      <div className="grid grid-cols-7 border-t border-l min-w-[700px] md:min-w-0">
         {weekDays.map(day => (
-          <div key={day} className="p-2 border-r border-b bg-gray-50 dark:bg-gray-800 text-center font-semibold text-sm">{day}</div>
+          <div key={day} className="p-2 border-r border-b bg-gray-50 dark:bg-gray-800 text-center font-semibold text-xs md:text-sm">{day}</div>
         ))}
         {days.map((day) => {
             const postsForDay = posts.filter(p => isSameDay(new Date(p.publicationDate), day));
@@ -91,25 +91,25 @@ export default function CalendarView({ onNewPost, posts, selectedDate, onDateSel
               <div
                 key={day.toString()}
                 className={cn(
-                    "h-32 p-2 border-r border-b relative overflow-hidden cursor-pointer transition-colors", 
+                    "h-24 md:h-32 p-1 md:p-2 border-r border-b relative overflow-hidden cursor-pointer transition-colors", 
                     !isSameMonth(day, currentDate) && "bg-gray-50 dark:bg-gray-800/50 text-muted-foreground",
                     isSelectedDay ? "bg-primary/10 ring-2 ring-primary z-10" : "hover:bg-accent"
                 )}
                 onClick={() => onDateSelect(day)}
               >
-                  <span className={cn("absolute top-2 right-2 text-sm", isCurrentDay && !isSelectedDay && "bg-primary text-primary-foreground rounded-full h-6 w-6 flex items-center justify-center")}>
+                  <span className={cn("absolute top-1 md:top-2 right-1 md:right-2 text-xs md:text-sm", isCurrentDay && !isSelectedDay && "bg-primary text-primary-foreground rounded-full h-5 w-5 md:h-6 md:w-6 flex items-center justify-center text-xs")}>
                       {format(day, 'd')}
                   </span>
                   <ScrollArea className="h-full">
-                      <div className="space-y-1 pr-2 pt-8">
+                      <div className="space-y-1 pr-1 md:pr-2 pt-6 md:pt-8">
                           {postsForDay.map((post) => (
                             <div
                               key={post.id}
                               className="mb-1"
                             >
-                              <Badge variant="secondary" className="w-full flex items-center gap-2 p-1 truncate">
+                              <Badge variant="secondary" className="w-full flex items-center gap-1 md:gap-2 p-1 truncate text-xs">
                                   <SocialIcon network={post.socialNetwork} />
-                                  <span className="truncate">{post.title}</span>
+                                  <span className="truncate text-xs">{post.title}</span>
                               </Badge>
                             </div>
                           ))}
@@ -129,9 +129,9 @@ export default function CalendarView({ onNewPost, posts, selectedDate, onDateSel
     const hours = Array.from({ length: 24 }, (_, i) => i);
     
     return (
-      <div className="flex border-t border-l">
-        <div className="w-16 shrink-0">
-           {hours.map(hour => <div key={hour} className="h-16 border-b border-r text-center text-xs p-1 pt-2 bg-gray-50 dark:bg-gray-800">{`${hour.toString().padStart(2, '0')}:00`}</div>)}
+      <div className="flex border-t border-l min-w-[800px] md:min-w-0">
+        <div className="w-12 md:w-16 shrink-0">
+           {hours.map(hour => <div key={hour} className="h-12 md:h-16 border-b border-r text-center text-xs p-1 pt-1 md:pt-2 bg-gray-50 dark:bg-gray-800">{`${hour.toString().padStart(2, '0')}:00`}</div>)}
         </div>
         <div className="grid grid-cols-7 flex-1">
           {days.map(day => {
@@ -143,21 +143,23 @@ export default function CalendarView({ onNewPost, posts, selectedDate, onDateSel
                   className={cn("relative cursor-pointer border-r", isSelectedDay ? "bg-primary/10" : "hover:bg-accent/50")}
                   onClick={() => onDateSelect(day)}
               >
-                <div className={cn("text-center p-2 border-b sticky top-0 bg-background z-10", isCurrentDay && !isSelectedDay && "bg-blue-100 dark:bg-blue-900")}>
-                  <p className="font-semibold">{format(day, 'EEE')}</p>
-                  <p className={cn("text-2xl", isCurrentDay && "text-primary")}>{format(day, 'd')}</p>
+                <div className={cn("text-center p-1 md:p-2 border-b sticky top-0 bg-background z-10", isCurrentDay && !isSelectedDay && "bg-blue-100 dark:bg-blue-900")}>
+                  <p className="font-semibold text-xs md:text-sm">{format(day, 'EEE')}</p>
+                  <p className={cn("text-lg md:text-2xl", isCurrentDay && "text-primary")}>{format(day, 'd')}</p>
                 </div>
                 <div className="relative">
-                  {hours.map(hour => <div key={hour} className="h-16 border-b"></div>)}
+                  {hours.map(hour => <div key={hour} className="h-12 md:h-16 border-b"></div>)}
                   {posts.filter(p => isSameDay(new Date(p.publicationDate), day)).map((post) => {
                       const postHour = getHours(new Date(post.publicationDate));
                       return (
                         <div
                           key={post.id}
-                          style={{ top: `${postHour * 4}rem`}}
                           className="absolute w-full p-1 z-20"
+                          style={{ 
+                            top: `calc(${postHour} * (3rem))`,
+                          }}
                         >
-                          <Badge variant="secondary" className="w-full flex items-center gap-2 p-1 truncate text-xs">
+                          <Badge variant="secondary" className="w-full flex items-center gap-1 md:gap-2 p-1 truncate text-xs">
                               <SocialIcon network={post.socialNetwork} />
                               <span className="truncate">{post.title}</span>
                           </Badge>

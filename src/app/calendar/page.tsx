@@ -145,63 +145,71 @@ export default function CalendarPage() {
   }
 
   return (
-    <div className="flex h-[calc(100vh-4rem)]">
-        <div className="flex-1 overflow-y-auto">
-            <div className="p-4 sm:p-6">
-                <div className="flex items-center justify-between mb-6">
-                    <h1 className="text-3xl font-bold tracking-tight">Editorial Calendar</h1>
-                    <div className="flex items-center gap-2">
-                        <ExportButton posts={posts} />
-                        <Button variant="outline" onClick={() => setIsImportOpen(true)}>
-                            <Upload className="mr-2 h-4 w-4" />
-                            Import
-                        </Button>
-                    </div>
-                </div>
-                <CalendarView 
-                    onNewPost={handleNewPost}
-                    posts={posts}
-                    selectedDate={selectedDate}
-                    onDateSelect={setSelectedDate}
-                />
-            </div>
+    <div className="-m-4 md:-m-6">
+      {/* Header móvil con título */}
+      <div className="flex items-center justify-between mb-4 md:mb-6 p-4 md:p-6 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:bg-transparent md:border-0 md:backdrop-blur-none">
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Editorial Calendar</h1>
+        <div className="flex items-center gap-2">
+          <ExportButton posts={posts} />
+          <Button variant="outline" size="sm" onClick={() => setIsImportOpen(true)}>
+            <Upload className="mr-2 h-4 w-4" />
+            <span className="hidden sm:inline">Import</span>
+          </Button>
         </div>
-        <aside className="w-96 border-l bg-secondary/50 dark:bg-background/50 overflow-y-auto">
-        <DayDetailsSidebar 
+      </div>
+
+      {/* Layout responsive */}
+      <div className="flex flex-col lg:flex-row lg:h-[calc(100vh-8rem)]">
+        {/* Calendario principal */}
+        <div className="flex-1 p-4 md:p-6 overflow-y-auto">
+          <CalendarView 
+            onNewPost={handleNewPost}
+            posts={posts}
+            selectedDate={selectedDate}
+            onDateSelect={setSelectedDate}
+          />
+        </div>
+        
+        {/* Sidebar de detalles - responsive */}
+        <aside className="w-full lg:w-96 border-t lg:border-t-0 lg:border-l bg-secondary/50 dark:bg-background/50 overflow-y-auto max-h-96 lg:max-h-none">
+          <DayDetailsSidebar 
             selectedDate={selectedDate}
             posts={postsForSelectedDay}
             onEditPost={handleEditPost}
             onDeletePost={handleDeleteRequest}
             onPreviewPost={handlePreviewPost}
-        />
+          />
         </aside>
-        <PostFormDialog
-            key={postToEdit?.id || 'new'}
-            open={isFormOpen}
-            onOpenChange={setIsFormOpen}
-            onSave={handleSavePost}
-            selectedDate={selectedDate}
-            post={postToEdit}
-            mediaFiles={mediaFiles}
-        />
-        <DeletePostDialog
-            open={!!postToDelete}
-            onOpenChange={() => setPostToDelete(null)}
-            onConfirm={handleDeletePost}
-            postTitle={postToDelete?.title}
-        />
-        <ImportDialog 
-            open={isImportOpen}
-            onOpenChange={setIsImportOpen}
-            onImportComplete={handleImportComplete}
-        />
-        {postToPreview && (
+      </div>
+
+      {/* Dialogs */}
+      <PostFormDialog
+        key={postToEdit?.id || 'new'}
+        open={isFormOpen}
+        onOpenChange={setIsFormOpen}
+        onSave={handleSavePost}
+        selectedDate={selectedDate}
+        post={postToEdit}
+        mediaFiles={mediaFiles}
+      />
+      <DeletePostDialog
+        open={!!postToDelete}
+        onOpenChange={() => setPostToDelete(null)}
+        onConfirm={handleDeletePost}
+        postTitle={postToDelete?.title}
+      />
+      <ImportDialog 
+        open={isImportOpen}
+        onOpenChange={setIsImportOpen}
+        onImportComplete={handleImportComplete}
+      />
+      {postToPreview && (
         <PostPreviewDialog
-            open={isPreviewOpen}
-            onOpenChange={setIsPreviewOpen}
-            post={postToPreview}
+          open={isPreviewOpen}
+          onOpenChange={setIsPreviewOpen}
+          post={postToPreview}
         />
-        )}
+      )}
     </div>
   );
 }

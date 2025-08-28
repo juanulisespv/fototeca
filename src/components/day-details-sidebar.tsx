@@ -48,10 +48,10 @@ const SocialIcon = ({ network }: { network: string }) => {
 export default function DayDetailsSidebar({ selectedDate, posts, onEditPost, onDeletePost, onPreviewPost }: DayDetailsSidebarProps) {
     if (!selectedDate) {
         return (
-            <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-4">
-                <Calendar className="h-16 w-16 mb-4" />
-                <h3 className="text-lg font-semibold">Select a day</h3>
-                <p className="text-sm">Click on any day in the calendar to see the scheduled posts.</p>
+            <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-3 md:p-4">
+                <Calendar className="h-12 md:h-16 w-12 md:w-16 mb-3 md:mb-4" />
+                <h3 className="text-base md:text-lg font-semibold">Select a day</h3>
+                <p className="text-xs md:text-sm">Click on any day in the calendar to see the scheduled posts.</p>
             </div>
         )
     }
@@ -59,12 +59,12 @@ export default function DayDetailsSidebar({ selectedDate, posts, onEditPost, onD
     const sortedPosts = posts.sort((a,b) => new Date(a.publicationDate).getTime() - new Date(b.publicationDate).getTime());
 
     return (
-        <div className="p-4 sm:p-6">
-            <h2 className="text-xl font-bold tracking-tight mb-1">{format(selectedDate, "MMMM d")}</h2>
-            <p className="text-muted-foreground mb-6">{format(selectedDate, "EEEE")}</p>
+        <div className="p-3 md:p-4 lg:p-6">
+            <h2 className="text-lg md:text-xl font-bold tracking-tight mb-1">{format(selectedDate, "MMMM d")}</h2>
+            <p className="text-sm text-muted-foreground mb-4 md:mb-6">{format(selectedDate, "EEEE")}</p>
 
             {sortedPosts.length > 0 ? (
-                <div className="space-y-4">
+                <div className="space-y-3 md:space-y-4">
                     {sortedPosts.map((post) => (
                         <Card key={post.id} className="bg-card relative group overflow-hidden">
                             <DropdownMenu>
