@@ -70,3 +70,6 @@ coverage/
 
 # Nix
 result
+
+# Versiones y backups
+versiones/
