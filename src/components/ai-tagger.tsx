@@ -26,9 +26,27 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
 import { useToast } from "@/hooks/use-toast"
 import { Sparkles, Loader2, Wand2 } from "lucide-react"
-import { suggestTags } from "@/ai/flows/suggest-tags"
-import type { SuggestTagsOutput } from "@/ai/flows/suggest-tags"
+// TODO: Implement actual AI tagging functionality
+// import { suggestTags } from "@/ai/flows/suggest-tags"
+// import type { SuggestTagsOutput } from "@/ai/flows/suggest-tags"
 import type { MediaFile } from "@/lib/types"
+
+// Placeholder types and functions until AI is implemented
+export type SuggestTagsOutput = {
+  tags: string[];
+};
+
+const suggestTags = async (params: { prompt: string; mediaFileNames: string[] }): Promise<{ suggestedTags: Record<string, string[]> }> => {
+  // Placeholder implementation - returns sample tags for each file
+  await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API delay
+  
+  const result: Record<string, string[]> = {};
+  params.mediaFileNames.forEach(fileName => {
+    result[fileName] = ['nature', 'photography', 'digital', 'collection'];
+  });
+  
+  return { suggestedTags: result };
+};
 
 const FormSchema = z.object({
   prompt: z.string().min(10, {
@@ -45,7 +63,7 @@ type AITaggerProps = {
 
 export default function AITagger({ open, setOpen, files, onApplyTags }: AITaggerProps) {
   const [isLoading, setIsLoading] = useState(false)
-  const [suggestedTags, setSuggestedTags] = useState<SuggestTagsOutput['suggestedTags'] | null>(null)
+  const [suggestedTags, setSuggestedTags] = useState<Record<string, string[]> | null>(null)
   const { toast } = useToast()
 
   const form = useForm<z.infer<typeof FormSchema>>({

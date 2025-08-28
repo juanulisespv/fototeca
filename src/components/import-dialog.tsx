@@ -18,13 +18,13 @@ const postImportSchema = z.object({
   title: z.string().min(1),
   text: z.string().optional().default(''),
   link: z.string().url().or(z.literal('')).optional().default(''),
-  mediaUrls: z.string().transform(val => val.split(',').map(s => s.trim()).filter(Boolean)).optional().default([]),
+  mediaUrls: z.string().transform(val => val.split(',').map(s => s.trim()).filter(Boolean)).optional().default(''),
   socialNetwork: z.enum(['Instagram', 'Facebook', 'LinkedIn', 'X', 'TikTok']),
   campaign: z.string().optional().default(''),
   publicationDate: z.string()
     .refine((val) => !isNaN(Date.parse(val)), { message: "Invalid date format" })
     .transform(str => new Date(str).toISOString()),
-  tags: z.string().transform(val => val.split(',').map(s => s.trim()).filter(Boolean)).optional().default([]),
+  tags: z.string().transform(val => val.split(',').map(s => s.trim()).filter(Boolean)).optional().default(''),
   status: z.enum(['Draft', 'Scheduled', 'Published']),
 });
 
@@ -130,7 +130,7 @@ export default function ImportDialog({ open, onOpenChange, onImportComplete }: I
       
       validPosts.forEach((post, i) => {
           const newPostRef = doc(postsCollection);
-          batch.set(newPostGgneratedRef, { ...post, creationDate: new Date().toISOString() });
+          batch.set(newPostRef, { ...post, creationDate: new Date().toISOString() });
           setProgress(50 + (((i + 1) / validPosts.length) * 50));
       });
 
