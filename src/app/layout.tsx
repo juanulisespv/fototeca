@@ -8,23 +8,43 @@ import { Home, Calendar, Camera, Settings } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Fototeca - Gestión Inteligente de Fotos',
-  description: 'Una aplicación moderna para gestionar y organizar tu colección de fotos con inteligencia artificial.',
-  keywords: ['fotos', 'galería', 'organización', 'IA', 'gestión de medios'],
+  title: 'Fototeca',
+  description: 'Catálogo visual de productos y planificación de contenido social.',
+  keywords: ['fotos', 'galería', 'organización', 'gestión de medios'],
   authors: [{ name: 'Juan Ulises' }],
   creator: 'Juan Ulises',
   publisher: 'Fototeca',
+  metadataBase: new URL('https://fototeca.vercel.app'),
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
   openGraph: {
     type: 'website',
     locale: 'es_ES',
-    title: 'Fototeca - Gestión Inteligente de Fotos',
-    description: 'Una aplicación moderna para gestionar y organizar tu colección de fotos con inteligencia artificial.',
+    title: 'Fototeca',
+    description: 'Catálogo visual de productos y planificación de contenido social.',
     siteName: 'Fototeca',
+    images: [
+      {
+        url: '/web-app-manifest-512x512.png',
+        width: 512,
+        height: 512,
+        alt: 'Fototeca - Catálogo visual',
+      }
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fototeca - Gestión Inteligente de Fotos',
-    description: 'Una aplicación moderna para gestionar y organizar tu colección de fotos con inteligencia artificial.',
+    title: 'Fototeca',
+    description: 'Catálogo visual de productos y planificación de contenido social.',
+    images: ['/web-app-manifest-512x512.png'],
   },
 };
 
